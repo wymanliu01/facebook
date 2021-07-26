@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/facebook/redirect', function () {
+    return Socialite::driver('facebook')->redirect();
+});
+
+Route::get('/facebook/callback', function () {
+    $user = Socialite::driver('facebook')->user();
 });
